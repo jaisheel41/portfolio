@@ -1,0 +1,18 @@
+<!-- main/templates/main/certifications.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certifications</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Certifications</h1>
+    <ul>
+        {% for cert in certifications %}
+            <li>{{ cert.name }} by {{ cert.issuer }} ({{ cert.date_received }})</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

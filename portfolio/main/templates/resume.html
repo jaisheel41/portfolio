@@ -1,0 +1,14 @@
+<!-- main/templates/main/resume.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Resume</h1>
+    <p><a href="/portfolio/portfolio/main/static/Software Dev.pdf" target="_blank">Download Resume</a></p>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
