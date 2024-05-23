@@ -56,13 +56,19 @@ ROOT_URLCONF = 'portfolio.urls'
 
 # portfolio/settings.py
 
+# portfolio/settings.py
+
+# portfolio/settings.py
+
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'main', 'templates')],
+        'DIRS': [BASE_DIR / 'main' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,6 +80,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 
 
@@ -134,11 +142,15 @@ USE_TZ = True
 
 # portfolio/settings.py
 
-STATIC_URL = '/static/'
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'main', 'static'),
-]
+# Other settings ...
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main', 'media')
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main', 'static')]
 
 
 # Default primary key field type

@@ -17,7 +17,7 @@ class Project(models.Model):
     technologies = models.CharField(max_length=200)
     role = models.CharField(max_length=100)
     link = models.URLField(blank=True, null=True)
-    image = models.ImageField(upload_to='projects/', blank=True, null=True)
+    image = models.ImageField(upload_to='main/static/media/projects/', blank=True, null=True)
 
 class Certification(models.Model):
     name = models.CharField(max_length=200)
