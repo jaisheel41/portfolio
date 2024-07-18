@@ -1,67 +1,113 @@
-<!-- main/templates/index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#resume">Resume</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="{% static 'self.jpg' %}" alt="Logo">
+                    <span>Jaisheel Polimera</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="social-icons">
+                    <a href="#"><img src="{% static 'LinkedIn_logo.png' %}" alt="LinkedIn"></a>
+                    <a href="#"><img src="{% static 'github_logo.png' %}" alt="GitHub"></a>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <section id="home">
-        <h1>Welcome to My Portfolio</h1>
-        <p>This is the home section of my portfolio.</p>
-    </section>
-
-    <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            {% for skill in skills %}
-                <li>{{ skill.name }} - {{ skill.proficiency }}</li>
-            {% endfor %}
-        </ul>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi there, <span class="wave">👋</span></h1>
+            <h1>My name is <span class="highlight">Jaisheel Polimera</span></h1>
+            <h2>I'm a Front End Developer</h2>
+            <a href="#contact" class="btn">Contact Me</a>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'self.jpg' %}" alt="Profile Picture">
+        </div>
     </section>
 
     <section id="education">
         <h2>Education</h2>
         <ul>
             {% for edu in education %}
-                <li>{{ edu.degree }} from {{ edu.institution }} ({{ edu.start_date }} - {{ edu.end_date }})</li>
+                <li>{{ edu.degree }} from {{ edu.institution }} ({{ edu.start_date }} - {{ edu.end_date }}){% if edu.grade %}, Grade: {{ edu.grade }}{% endif %}</li>
             {% endfor %}
         </ul>
     </section>
 
-    <section id="projects">
-        <h2>Projects</h2>
+    <section id="experience">
+        <h2>Experience</h2>
         <ul>
-            {% for project in projects %}
+            {% for exp in experience %}
                 <li>
-                    <h3>{{ project.title }}</h3>
-                    <p>{{ project.description }}</p>
-                    <p>Technologies: {{ project.technologies }}</p>
-                    <p>Role: {{ project.role }}</p>
-                    {% if project.link %}
-                        <p><a href="{{ project.link }}">View Project</a></p>
-                    {% endif %}
-                    {% if project.image %}
-                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
-                    {% endif %}
+                    <h3>{{ exp.role }}</h3>
+                    <p>{{ exp.company }}</p>
+                    <p>{{ exp.description }}</p>
+                    <p>{{ exp.start_date }} - {{ exp.end_date }}</p>
                 </li>
             {% endfor %}
         </ul>
+    </section>
+
+    <section id="skills">
+        <h2>My Skills</h2>
+        <div class="skills-container">
+            {% for skill in skills %}
+                <div class="skill">
+                    {% if skill.icon %}
+                        <img src="{{ skill.icon.url }}" alt="{{ skill.name }}">
+                    {% endif %}
+                    <p>{{ skill.name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Personal Projects</h2>
+        <div class="projects-container">
+            {% for project in projects %}
+                <div class="project-card">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+                    <div class="project-content">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
+                        <p>Technologies: {{ project.technologies }}</p>
+                        <div class="project-links">
+                            {% if project.live_preview %}
+                                <a href="{{ project.live_preview }}" class="btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Preview
+                                </a>
+                            {% endif %}
+                            {% if project.code %}
+                                <a href="{{ project.code }}" class="btn">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </section>
 
     <section id="certifications">
@@ -71,11 +117,6 @@
                 <li>{{ cert.name }} by {{ cert.issuer }} ({{ cert.date_received }})</li>
             {% endfor %}
         </ul>
-    </section>
-
-    <section id="resume">
-        <h2>Resume</h2>
-        <p><a href="/path/to/your/resume.pdf" target="_blank">Download Resume</a></p>
     </section>
 
     <section id="contact">
