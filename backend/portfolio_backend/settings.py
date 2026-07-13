@@ -119,9 +119,7 @@ DATABASES = {
             "sslmode": "require",
         },
         "CONN_MAX_AGE": (
-            0
-            if _use_supabase_pooler
-            else config("DB_CONN_MAX_AGE", default=60, cast=int)
+            0 if _use_supabase_pooler else config("DB_CONN_MAX_AGE", default=60, cast=int)
         ),
     }
 }
